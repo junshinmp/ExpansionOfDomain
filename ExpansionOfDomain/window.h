@@ -6,6 +6,6 @@ bool init();
 
 bool loadImage();
 
-bool close();
+bool closeImg();
 
 bool startUp();
