@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="window.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="window.h">
-      <Filter>headers</Filter>
-    </ClInclude>
+    <Image Include="..\..\..\..\Pictures\Screenshots\Screenshot (147).png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
