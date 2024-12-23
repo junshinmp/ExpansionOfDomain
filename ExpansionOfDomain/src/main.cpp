@@ -4,6 +4,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+void gameloop();
 bool newBackground();
 bool init();
 void cleanUp();
@@ -11,6 +12,10 @@ void cleanUp();
 SDL_Window* window = NULL;
 SDL_Surface* surface = NULL;
 SDL_Surface* background = NULL;
+
+void gameloop() {
+
+}
 
 bool newBackground() 
 {
