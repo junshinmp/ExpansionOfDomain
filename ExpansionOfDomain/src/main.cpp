@@ -4,33 +4,38 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-bool loadBackground();
+bool newBackground();
 bool init();
 void cleanUp();
 
 SDL_Window* window = NULL;
 SDL_Surface* surface = NULL;
+SDL_Surface* background = NULL;
 
-bool loadBackground() {
-
+bool newBackground() 
+{
+	background = SDL_LoadBMP("res/mountains-7728691_640.bmp");
+	if (background == NULL) {
+		return false;
+	}
+	return true;
 }
 
 bool init()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) { printf("Initalization of SDL failed. SDL_Error: %s\n", SDL_GetError()); return false; }
-	window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	if (window == NULL) { printf("Creation of window failed. SDL_Error: %s\n", SDL_GetError()); return false; }
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) { return false; }
+	window = SDL_CreateWindow("Expansion of Domain", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	if (window == NULL) { return false; }
 	surface = SDL_GetWindowSurface(window);
 	return true;
 }
 
 void cleanUp()
 {
-	SDL_FreeSurface(surface);
-
+	SDL_FreeSurface(background);
 	SDL_DestroyWindow(window);
 	
-	surface = NULL;
+	background = NULL;
 	window = NULL;
 
 	SDL_Quit();
@@ -42,6 +47,15 @@ int main(int argc, char* args[])
 	if (!init())
 	{
 		printf("Failed to initialize!\n");
+	}
+	else {
+		if (!newBackground()) {
+			printf("Background could not be loaded.");
+		}
+		else {
+			SDL_BlitSurface(background, NULL, surface, NULL);
+			SDL_UpdateWindowSurface(window);
+		}
 	}
 
 	bool quit = false;
