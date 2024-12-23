@@ -4,6 +4,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+void gameloop();
 bool newBackground();
 bool init();
 void cleanUp();
@@ -11,6 +12,23 @@ void cleanUp();
 SDL_Window* window = NULL;
 SDL_Surface* surface = NULL;
 SDL_Surface* background = NULL;
+
+void gameloop() {
+	bool quit = false;
+	SDL_Event event;
+	while (!quit)
+	{
+		// Handle events on queue
+		while (SDL_PollEvent(&event) != 0)
+		{
+			// User requests quit
+			if (event.type == SDL_QUIT)
+			{
+				quit = true;
+			}
+		}
+	}
+}
 
 bool newBackground() 
 {
@@ -58,20 +76,7 @@ int main(int argc, char* args[])
 		}
 	}
 
-	bool quit = false;
-	SDL_Event event;
-	while (!quit)
-	{
-		// Handle events on queue
-		while (SDL_PollEvent(&event) != 0)
-		{
-			// User requests quit
-			if (event.type == SDL_QUIT)
-			{
-				quit = true;
-			}
-		}
-	}
+	gameloop();
 
 	//Free resources and close SDL
 	cleanUp();
