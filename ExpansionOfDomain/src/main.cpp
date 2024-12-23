@@ -1,8 +1,12 @@
 #include <SDL.h>
 #include <stdio.h>
 
+#include "renderer.h"
+
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+const int SCREEN_FPS = 60;
+const int SCREEN_MS_PER_FRAME = 1000 / SCREEN_FPS;
 
 void gameloop();
 bool newBackground();
