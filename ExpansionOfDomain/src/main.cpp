@@ -3,7 +3,7 @@
 
 #include "renderer.h"
 
-const int SCREEN_WIDTH = 640;
+const int SCREEN_WIDTH = 680;
 const int SCREEN_HEIGHT = 480;
 
 void gameloop();
@@ -59,7 +59,7 @@ int main(int argc, char* args[])
 		printf("Failed to initialize!\n");
 	}
 	else {
-		if (!loadScreen(background, "res/mountains-7728691_640.bmp")) {
+		if (!loadScreen(background, "res/ForwardRight.bmp")) {
 			printf("Background could not be loaded.");
 		}
 		else {
