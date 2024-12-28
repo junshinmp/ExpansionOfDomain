@@ -16,10 +16,13 @@ void cleanUp();
 SDL_Window* window = NULL;
 SDL_Surface* surface = NULL;
 SDL_Surface* background = NULL;
+SDL_Surface* 
 
 void gameloop() {
 	bool quit = false;
 	SDL_Event event;
+	ScreenFiles curr = DEFAULT_LOAD; // simply maintains the current screen that the user is one (i.e. menu)
+
 	while (!quit)
 	{
 		// Handle events on queue
