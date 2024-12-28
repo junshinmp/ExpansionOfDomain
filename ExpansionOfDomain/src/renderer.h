@@ -5,6 +5,6 @@
 
 #include <SDL.h>
 
-bool loadScreen(SDL_Surface * background, const char* pathway);
+bool loadScreen(SDL_Surface *& background, const char* pathway);
 
 #endif RENDERER_H
