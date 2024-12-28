@@ -16,7 +16,6 @@ void cleanUp();
 SDL_Window* window = NULL;
 SDL_Surface* surface = NULL;
 SDL_Surface* background = NULL;
-SDL_Surface* 
 
 void gameloop() {
 	bool quit = false;
@@ -74,7 +73,7 @@ int main(int argc, char* args[])
 		printf("Failed to initialize!\n");
 	}
 	else {
-		if (!loadScreen(background, resources.at(DEFAULT_LOAD))) {
+		if (!loadScreens(background, resources.at(DEFAULT_LOAD))) {
 			printf("Background could not be loaded.");
 		}
 		else {
