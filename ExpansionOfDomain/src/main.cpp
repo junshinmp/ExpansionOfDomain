@@ -59,7 +59,7 @@ int main(int argc, char* args[])
 		printf("Failed to initialize!\n");
 	}
 	else {
-		if (!loadScreen(background, "res/ForwardRight.bmp")) {
+		if (!loadScreen(background, "res/NeutralSelectr.bmp")) {
 			printf("Background could not be loaded.");
 		}
 		else {
