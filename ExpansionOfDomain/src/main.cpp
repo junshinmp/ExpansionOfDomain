@@ -1,11 +1,12 @@
 #include <SDL.h>
 #include <stdio.h>
 
+#include "renderer.h"
+
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 void gameloop();
-bool newBackground();
 bool init();
 void cleanUp();
 
@@ -28,15 +29,6 @@ void gameloop() {
 			}
 		}
 	}
-}
-
-bool newBackground() 
-{
-	background = SDL_LoadBMP("res/mountains-7728691_640.bmp");
-	if (background == NULL) {
-		return false;
-	}
-	return true;
 }
 
 bool init()
@@ -67,7 +59,7 @@ int main(int argc, char* args[])
 		printf("Failed to initialize!\n");
 	}
 	else {
-		if (!newBackground()) {
+		if (!loadScreen(background, "res/mountains-7728691_640.bmp")) {
 			printf("Background could not be loaded.");
 		}
 		else {
