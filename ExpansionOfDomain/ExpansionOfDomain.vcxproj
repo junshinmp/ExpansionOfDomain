@@ -133,9 +133,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\player1.cpp" />
+    <ClCompile Include="src\player2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Documents\Random Files\Memes\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
