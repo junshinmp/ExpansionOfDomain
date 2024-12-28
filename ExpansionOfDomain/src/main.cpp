@@ -1,7 +1,10 @@
 #include <SDL.h>
 #include <stdio.h>
+#include <map>
+#include <string>
 
 #include "renderer.h"
+#include "ScreenFiles.h"
 
 const int SCREEN_WIDTH = 680;
 const int SCREEN_HEIGHT = 480;
@@ -53,13 +56,22 @@ void cleanUp()
 
 int main(int argc, char* args[])
 {
+	// map for all the files that are going to be used
+	std::map<ScreenFiles, const char*> resources  = {
+		{DEFAULT_LOAD, "res/NeutralSelectr.bmp"},
+		{TRAINING, "res/TrainingSelect.bmp" },
+		{LOCAL, "res/LocalSelect.bmp"},
+		{QUIT, "res/QuitSelect.bmp"}
+	};
+
+	printf(resources.at(DEFAULT_LOAD));
 	//Start up SDL and create window
 	if (!init())
 	{
 		printf("Failed to initialize!\n");
 	}
 	else {
-		if (!loadScreen(background, "res/NeutralSelectr.bmp")) {
+		if (!loadScreen(background, resources.at(DEFAULT_LOAD))) {
 			printf("Background could not be loaded.");
 		}
 		else {
