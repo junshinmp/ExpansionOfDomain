@@ -139,7 +139,7 @@
     <Image Include="..\..\..\..\Documents\Random Files\Memes\2.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\renderer.h" />
+    <ClInclude Include="include\renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
