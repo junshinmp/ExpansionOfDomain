@@ -10,3 +10,5 @@ bool loadScreen(SDL_Surface*& background, const char* pathway) {
 	return true;
 }
 
+
+
