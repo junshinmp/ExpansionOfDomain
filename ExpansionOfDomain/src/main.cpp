@@ -13,13 +13,17 @@ void gameloop();
 bool init();
 void cleanUp();
 
+ScreenFiles curr = DEFAULT_LOAD;  // simply maintains the current screen that the user is one (i.e. menu)
 SDL_Window* window = NULL;
 SDL_Surface* surface = NULL;
 SDL_Surface* background = NULL;
+std::map<ScreenFiles, const char*> resources;
 
 void gameloop() {
 	bool quit = false;
 	SDL_Event event;
+	
+	// processes all gameplay functionality, processing, and the "loop"
 	while (!quit)
 	{
 		// Handle events on queue
@@ -57,7 +61,7 @@ void cleanUp()
 int main(int argc, char* args[])
 {
 	// map for all the files that are going to be used
-	std::map<ScreenFiles, const char*> resources  = {
+	resources = {
 		{DEFAULT_LOAD, "res/NeutralSelectr.bmp"},
 		{TRAINING, "res/TrainingSelect.bmp" },
 		{LOCAL, "res/LocalSelect.bmp"},
@@ -71,7 +75,7 @@ int main(int argc, char* args[])
 		printf("Failed to initialize!\n");
 	}
 	else {
-		if (!loadScreen(background, resources.at(DEFAULT_LOAD))) {
+		if (!loadScreens(background, resources.at(DEFAULT_LOAD))) {
 			printf("Background could not be loaded.");
 		}
 		else {
@@ -79,6 +83,17 @@ int main(int argc, char* args[])
 			SDL_UpdateWindowSurface(window);
 		}
 	}
+
+	SDL_Delay(500);
+
+	if (!loadScreens(background, resources.at(TRAINING))) {
+		printf("Training screen could not be loaded.");
+	}
+	else {
+		SDL_BlitSurface(background, NULL, surface, NULL);
+		SDL_UpdateWindowSurface(window);
+	}
+	curr = TRAINING;
 
 	gameloop();
 
