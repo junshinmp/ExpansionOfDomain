@@ -21,6 +21,7 @@ KeyboardControls::KeyboardControls() {
 
 bool KeyboardControls::rebind(SDL_Keycode, Controls action) {
 	// checks if button is already set.
+	return true;
 }
 
 Controls KeyboardControls::action(SDL_Keycode input) {
