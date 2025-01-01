@@ -5,8 +5,13 @@
 
 #include <SDL.h>
 #include <stdio.h>
+#include "ScreenFiles.h"
 
-bool loadScreens(SDL_Surface *& background, const char* pathway);
+bool init();
+
+void cleanUp();
+
+bool loadScreens(ScreenFiles load);
 
 SDL_Surface* loadSurface(const char* pathway);
 
