@@ -38,17 +38,12 @@ int main(int argc, char* args[])
 		printf("Failed to initialize!\n");
 	}
 	else {
-		if (!loadScreens(DEFAULT_LOAD)) {
+		if (!loadScreens()) {
 			printf("Background could not be loaded.");
 		}
 	}
 
 	SDL_Delay(500);
-
-	if (!loadScreens(TRAINING)) {
-		printf("Training screen could not be loaded.");
-	}
-
 	gameloop();
 
 	//Free resources and close SDL

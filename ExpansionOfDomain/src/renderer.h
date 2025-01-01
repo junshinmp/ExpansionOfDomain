@@ -11,7 +11,7 @@ bool init();
 
 void cleanUp();
 
-bool loadScreens(ScreenFiles load);
+bool loadScreens();
 
 SDL_Surface* loadSurface(const char* pathway);
 

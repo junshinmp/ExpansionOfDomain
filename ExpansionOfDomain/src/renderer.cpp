@@ -4,44 +4,20 @@
 
 #include "renderer.h"
 #include "ScreenFiles.h"
+#include "KeyboardControls.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
 ScreenFiles curr = DEFAULT_LOAD;  // simply maintains the current screen that the user is one (i.e. menu)
-SDL_Window* window = NULL;
-SDL_Surface* surface = NULL;
-SDL_Surface* background = NULL;
+SDL_Window* window = nullptr;
+SDL_Surface* surface = nullptr;
+SDL_Surface* background = nullptr;
 
-std::map<ScreenFiles, const char*> resources; // map holding the pathways to each bmp file, using Enums as the key
+std::map<ScreenFiles, SDL_Surface*> SurfaceImages; // holds the loaded Surface images in a map, using Enums as the key
 
 bool init()
 {
-	// map for all the files that are going to be used
-	resources = {
-		// Starting Menu Elements
-		{DEFAULT_LOAD, "res/NeutralSelectr.bmp"},
-		{TRAINING, "res/TrainingSelect.bmp" },
-		{LOCAL, "res/LocalSelect.bmp"},
-		{QUIT, "res/QuitSelect.bmp"},
-
-		// Button Presses
-		{BACKWARDS, "res/Back.bmp"},
-		{FORWARDS, "res/Right.bmp"},
-		{UP, "res/Up.bmp"},
-		{DOWN, "res/Down.bmp"},
-		{UP_FORWARDS, "res/ForwardRight.bmp"},
-		{UP_BACKWARDS, "res/ForwardLeft.bmp"},
-		{DOWN_BACKWARDS, "res/DownLeft.bmp"},
-		{DOWN_FORWARDS, "res/DownRight.bmp"},
-		{LATTACK1, "res/Move1.bmp"},
-		{MATTACK1, "res/Move2.bmp"},
-		{HATTACK1, "res/Move3.bmp"},
-		{LATTACK2, "res/Move4.bmp"},
-		{MATTACK2, "res/Move5.bmp"},
-		{HATTACK2, "res/Move6.bmp"}
-	};
-
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) { return false; }
 	window = SDL_CreateWindow("Expansion of Domain", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (window == NULL) { return false; }
@@ -50,25 +26,58 @@ bool init()
 }
 
 void cleanUp() {
-	SDL_FreeSurface(background);
-	SDL_DestroyWindow(window);
+	for (int i = 0; i < TOTAL_SCREEN_FILES; i++) {
+		SDL_FreeSurface(SurfaceImages[static_cast<ScreenFiles>(i)]);
+		SurfaceImages[static_cast<ScreenFiles>(i)] = nullptr;
+	}
 
-	background = NULL;
-	window = NULL;
+	SDL_DestroyWindow(window);
+	window = nullptr;
 
 	SDL_Quit();
 }
 
-bool loadScreens(ScreenFiles load) {
-	background = SDL_LoadBMP(resources.at(load));
-	if (background == NULL) {
-		return false;
+bool loadScreens() {
+	bool success = true;
+
+	// doing all the preloading prior to anything else since the game does not have much to preload.
+	// loads the main menu elements first
+	SurfaceImages[DEFAULT_LOAD] = loadSurface("res/NeutralSelectr.bmp");
+	SurfaceImages[TRAINING] = loadSurface("res/TrainingSelect.bmp");
+	SurfaceImages[LOCAL] = loadSurface("res/LocalSelect.bmp");
+	SurfaceImages[QUIT] = loadSurface("res/QuitSelect.bmp");
+	
+	// loads the menu for checking controls
+	SurfaceImages[BACKWARDS] = loadSurface("res/Back.bmp");
+	SurfaceImages[FORWARDS] = loadSurface("res/Right.bmp");
+	SurfaceImages[UP] = loadSurface("res/Up.bmp");
+	SurfaceImages[DOWN] = loadSurface("res/Down.bmp");
+	SurfaceImages[UP_FORWARDS]= loadSurface("res/ForwardRight.bmp");
+	SurfaceImages[UP_BACKWARDS] = loadSurface("res/ForwardLeft.bmp");
+	SurfaceImages[DOWN_BACKWARDS] = loadSurface("res/DownLeft.bmp");
+	SurfaceImages[DOWN_FORWARDS] = loadSurface("res/DownRight.bmp");
+	SurfaceImages[LATTACK1] = loadSurface("res/Move1.bmp");
+	SurfaceImages[MATTACK1] = loadSurface("res/Move2.bmp");
+	SurfaceImages[HATTACK1] = loadSurface("res/Move3.bmp");
+	SurfaceImages[LATTACK2] = loadSurface("res/Move4.bmp");
+	SurfaceImages[MATTACK2] = loadSurface("res/Move5.bmp");
+	SurfaceImages[HATTACK2] = loadSurface("res/Move6.bmp");
+	
+	// does a check to if the process failed for any of the screens.
+	for (int i = 0; i < TOTAL_SCREEN_FILES; i++) {
+		if (SurfaceImages[static_cast<ScreenFiles>(i)] == NULL) {
+			success = false;
+		}
 	}
 
-	SDL_BlitSurface(background, NULL, surface, NULL);
-	SDL_UpdateWindowSurface(window);
+	// simply puts the current image now onto the window prior to any more rendering
+	if (success) {
+		background = SurfaceImages.at(curr);
+		SDL_BlitSurface(background, NULL, surface, NULL);
+		SDL_UpdateWindowSurface(window);
+	}
 
-	return true;
+	return success;
 }
 
 SDL_Surface* loadSurface(const char* pathway) {
