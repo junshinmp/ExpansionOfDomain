@@ -13,7 +13,7 @@ void cleanUp();
 
 bool loadScreens();
 
-bool loadSurface(const char* pathway);
+SDL_Surface* loadSurface(const char* pathway);
 
 ScreenFiles getCurrScreenFile();
 
