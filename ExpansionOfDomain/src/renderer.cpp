@@ -79,12 +79,16 @@ bool loadScreens() {
 	return success;
 }
 
-SDL_Surface* loadSurface(const char* pathway) {
+bool loadSurface(const char* pathway) {
 	SDL_Surface* currLoad = SDL_LoadBMP(pathway);
 	if (currLoad == NULL) {
 		printf("Current surface could not be loaded at the specified pathway.");
 	}
-	return currLoad;
+
+	// puts the new screen in this function
+	SDL_BlitSurface(currLoad, NULL, surface, NULL);
+	SDL_UpdateWindowSurface(window);
+	return true;
 }
 
 ScreenFiles getCurrScreenFile() {
