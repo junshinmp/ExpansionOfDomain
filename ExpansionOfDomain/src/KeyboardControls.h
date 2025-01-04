@@ -10,7 +10,6 @@
 
 class KeyboardControls {
 private:
-
 	std::map<SDL_Keycode, Controls> keyMappings;
 
 public:
