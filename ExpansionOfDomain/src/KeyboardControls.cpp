@@ -5,6 +5,9 @@
 #include "KeyboardControls.h"
 #include "Controls.h"
 
+/**
+* Sets the default bindings here with the proper Controls Enum
+**/
 KeyboardControls::KeyboardControls() {
 	// sets the default buttons for keyboard
 	keyMappings[SDLK_w] = KEY_PRESS_UP;

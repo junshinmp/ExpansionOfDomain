@@ -8,6 +8,9 @@
 const int SCREEN_WIDTH = 680;
 const int SCREEN_HEIGHT = 480;
 
+/**
+* Processes all game loop functions, handling events and key presses
+**/
 void gameloop();
 
 void gameloop() {
@@ -44,6 +47,9 @@ void gameloop() {
 	}
 }
 
+/**
+* Initalizes SDL and runs all necessary functions.
+**/
 int main(int argc, char* args[])
 {
 	//Start up SDL and create window
@@ -57,7 +63,7 @@ int main(int argc, char* args[])
 		}
 	}
 
-	SDL_Delay(500);
+	// starts the game loop
 	gameloop();
 
 	//Free resources and close SDL

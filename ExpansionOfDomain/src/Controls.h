@@ -4,7 +4,8 @@
 #define CONTROLS_H
 
 /**
-* 
+* Controls Enums for the program to process
+* Allows for better integration within controller and Keyboard inputs
 **/
 enum Controls {
 	KEY_PRESS_DOWN,

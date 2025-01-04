@@ -3,6 +3,9 @@
 #ifndef SCREENFILES_H
 #define SCREENFILES_H
 
+/**
+* Enums for each of the Screenfiles relating to Screens in the Map
+**/
 enum ScreenFiles {
 	DEFAULT_LOAD,
 	TRAINING,

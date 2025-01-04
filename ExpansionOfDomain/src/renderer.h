@@ -7,14 +7,30 @@
 #include <stdio.h>
 #include "ScreenFiles.h"
 
+/**
+* Initalizes SDL2, sets up the window
+**/
 bool init();
 
+/**
+* Cleans up any assets that were used in the program
+**/
 void cleanUp();
 
+/**
+* Preloads all the screens that are going to be used in the game
+* 
+**/
 bool loadScreens();
 
+/**
+* Loads the pathway surface for future use
+**/
 SDL_Surface* loadSurface(const char* pathway);
 
+/**
+* returns what the current screen file is
+**/
 ScreenFiles getCurrScreenFile();
 
 #endif RENDERER_H

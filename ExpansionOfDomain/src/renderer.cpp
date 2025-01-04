@@ -25,6 +25,7 @@ bool init()
 }
 
 void cleanUp() {
+	// goes through each of the Screen files and frees it from memory
 	for (int i = 0; i < TOTAL_SCREEN_FILES; i++) {
 		SDL_FreeSurface(SurfaceImages[static_cast<ScreenFiles>(i)]);
 		SurfaceImages[static_cast<ScreenFiles>(i)] = nullptr;
