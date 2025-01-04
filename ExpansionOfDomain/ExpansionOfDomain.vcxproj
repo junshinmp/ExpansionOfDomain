@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="src\KeyboardControls.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="src\Controls.h" />
     <ClInclude Include="src\KeyboardControls.h" />
+    <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\renderer.h" />
     <ClInclude Include="src\ScreenFiles.h" />
   </ItemGroup>

@@ -5,6 +5,7 @@
 
 #include <SDL.h>
 #include <stdio.h>
+#include <map>
 
 #include "Controls.h"
 

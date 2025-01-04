@@ -24,6 +24,9 @@
     <ClCompile Include="src\KeyboardControls.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Documents\Random Files\Memes\2.png">
@@ -41,6 +44,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="src\Controls.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
