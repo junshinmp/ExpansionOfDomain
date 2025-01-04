@@ -15,4 +15,6 @@ bool loadScreens();
 
 SDL_Surface* loadSurface(const char* pathway);
 
+ScreenFiles getCurrScreenFile();
+
 #endif RENDERER_H

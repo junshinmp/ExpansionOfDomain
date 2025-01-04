@@ -86,3 +86,7 @@ SDL_Surface* loadSurface(const char* pathway) {
 	}
 	return currLoad;
 }
+
+ScreenFiles getCurrScreenFile() {
+	return curr;
+}

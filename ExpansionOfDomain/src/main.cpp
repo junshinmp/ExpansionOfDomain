@@ -5,6 +5,7 @@
 
 #include "renderer.h"
 #include "ScreenFiles.h"
+#include "KeyboardControls.h"
 
 const int SCREEN_WIDTH = 680;
 const int SCREEN_HEIGHT = 480;
@@ -19,12 +20,27 @@ void gameloop() {
 	while (!quit)
 	{
 		// Handle events on queue
+		// will also split into three different functions dependent on what specific screen the user is on
+		// i.e: in the main menu, training
+		// only done on keyboard currently
+		ScreenFiles curr = getCurrScreenFile();
+
 		while (SDL_PollEvent(&event) != 0)
 		{
-			// User requests quit
-			if (event.type == SDL_QUIT)
-			{
+			switch (event.type) {
+				// checking for quit
+			case SDL_QUIT:
 				quit = true;
+				break;
+				// checking for if user pushes down a key
+			case SDL_KEYDOWN:
+
+				switch (curr) {
+				case DEFAULT_LOAD:
+					// manually writing out the different inputs here, TODO, find better implementation here
+					break;
+				}
+				break;
 			}
 		}
 	}

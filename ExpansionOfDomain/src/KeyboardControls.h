@@ -15,7 +15,7 @@ private:
 public:
 	KeyboardControls();
 
-	bool rebind(SDL_Keycode rebindKey, Controls action);
+	void rebind(SDL_Keycode rebindKey, Controls action);
 
 	Controls action(SDL_Keycode);
 };

@@ -19,11 +19,27 @@ KeyboardControls::KeyboardControls() {
 	keyMappings[SDLK_l] = KEY_PRESS_HATK2;
 }
 
-bool KeyboardControls::rebind(SDL_Keycode, Controls action) {
-	// checks if button is already set.
-	return true;
+void KeyboardControls::rebind(SDL_Keycode key, Controls action) {
+	// removes binding if it already exists under other "action"
+	for (auto curr = keyMappings.begin(); curr != keyMappings.end(); ++curr) {
+		if (curr->second == action) {
+			// deletes from the mapping here
+			keyMappings.erase(curr);
+			break;
+		}
+	}
+	// now sets the new key to the action in the map
+	keyMappings[key] = action;
 }
 
 Controls KeyboardControls::action(SDL_Keycode input) {
+	// below, just checks that the input exists
+	auto inputted = keyMappings.find(input);
+	// if it does not, then returns the NONE value from the Controls Enums.
+	if (inputted != keyMappings.end()) {
+		return Controls::NONE;
+	}
+	// or if it does exist, then returns with the at() function since it confidently exists.
 	return keyMappings.at(input);
+	
 }
