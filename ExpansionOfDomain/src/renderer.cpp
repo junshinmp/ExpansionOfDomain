@@ -48,6 +48,7 @@ bool loadScreens() {
 	SurfaceImages[QUIT] = loadSurface("res/QuitSelect.bmp");
 	
 	// loads the menu for checking controls
+	SurfaceImages[NEUTRAL_CONTROLLER] = loadSurface("res/NeutralControlPanel.bmp");
 	SurfaceImages[BACKWARDS] = loadSurface("res/Back.bmp");
 	SurfaceImages[FORWARDS] = loadSurface("res/Right.bmp");
 	SurfaceImages[UP] = loadSurface("res/Up.bmp");
@@ -96,6 +97,7 @@ ScreenFiles getCurrScreenFile() {
 
 void setCurrScreenFile(ScreenFiles newScreenFiles) {
 	curr = newScreenFiles;
+	loadUpdatedWindow();
 }
 
 void loadUpdatedWindow() {

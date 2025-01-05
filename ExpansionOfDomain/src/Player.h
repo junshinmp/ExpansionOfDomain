@@ -9,6 +9,11 @@
 class Player {
 public: 
 	/**
+	* Default Constructor for Player Object
+	**/
+	Player();
+
+	/**
 	* Rebinds the current Player's keyboard bindings to the new key
 	**/
 	void rebind(SDL_Keycode key, Controls action);
@@ -17,6 +22,11 @@ public:
 	* Returns the action that the player is attempting to perform with the key
 	**/
 	Controls getAction(SDL_Keycode key);
+
+	/**
+	* Sets the side of the player (true = left, false = right)
+	**/
+	void setSide(bool side);
 
 private:
 	// Players respective keyboard bindings
