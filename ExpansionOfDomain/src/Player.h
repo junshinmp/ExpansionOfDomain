@@ -27,8 +27,8 @@ private:
 	// Checks if user has a controller plugged in, then behaves differently on rebindings
 	bool controllerPlugged;
 
-	// Checks what side the user wants to start on the screen
-	bool sideStart;
+	// Checks what side the user wants to start on the screen (left = true, right = false)
+	bool startLeft;
 };
 
 #endif PLAYER_H

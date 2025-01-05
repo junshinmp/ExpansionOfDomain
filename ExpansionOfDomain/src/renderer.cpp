@@ -72,9 +72,11 @@ bool loadScreens() {
 
 	// simply puts the current image now onto the window prior to any more rendering
 	if (success) {
-		background = SurfaceImages.at(curr);
-		SDL_BlitSurface(background, NULL, surface, NULL);
-		SDL_UpdateWindowSurface(window);
+		loadUpdatedWindow();
+		// small delay just for cool transition
+		SDL_Delay(500);
+		curr = TRAINING;
+		loadUpdatedWindow();
 	}
 
 	return success;
@@ -90,4 +92,14 @@ SDL_Surface* loadSurface(const char* pathway) {
 
 ScreenFiles getCurrScreenFile() {
 	return curr;
+}
+
+void setCurrScreenFile(ScreenFiles newScreenFiles) {
+	curr = newScreenFiles;
+}
+
+void loadUpdatedWindow() {
+	background = SurfaceImages.at(curr);
+	SDL_BlitSurface(background, NULL, surface, NULL);
+	SDL_UpdateWindowSurface(window);
 }

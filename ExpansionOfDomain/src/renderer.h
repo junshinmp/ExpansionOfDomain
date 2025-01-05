@@ -33,4 +33,14 @@ SDL_Surface* loadSurface(const char* pathway);
 **/
 ScreenFiles getCurrScreenFile();
 
+/**
+* sets the current ScreenFile
+**/
+void setCurrScreenFile(ScreenFiles newScreenFiles);
+
+/**
+* blits and updates the window to the current correct screen
+**/
+void loadUpdatedWindow();
+
 #endif RENDERER_H

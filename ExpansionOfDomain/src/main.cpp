@@ -4,6 +4,7 @@
 
 #include "renderer.h"
 #include "ScreenFiles.h"
+#include "Controls.h"
 
 const int SCREEN_WIDTH = 680;
 const int SCREEN_HEIGHT = 480;
