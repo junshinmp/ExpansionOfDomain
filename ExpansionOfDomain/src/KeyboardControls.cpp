@@ -39,7 +39,7 @@ Controls KeyboardControls::action(SDL_Keycode input) {
 	// below, just checks that the input exists
 	auto inputted = keyMappings.find(input);
 	// if it does not, then returns the NONE value from the Controls Enums.
-	if (inputted != keyMappings.end()) {
+	if (inputted == keyMappings.end()) {
 		return Controls::NONE;
 	}
 	// or if it does exist, then returns with the at() function since it confidently exists.

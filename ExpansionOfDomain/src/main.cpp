@@ -45,7 +45,14 @@ void gameloop() {
 				break;
 				// checking for if user pushes down a key
 			case SDL_KEYDOWN:
-				Controls action = playerOne.getAction(event.key.keysym.sym);
+				SDL_Keycode code = event.key.keysym.sym;
+				Controls action = playerOne.getAction(code);
+				printf("Key of user: %s\n", SDL_GetKeyName(code));
+
+				if (action == NONE ) {
+					printf("This is not initalized\n");
+				}
+
 				switch (curr) {
 				case DEFAULT_LOAD:
 					// manually writing out the different inputs here, TODO, find better implementation here
@@ -67,8 +74,9 @@ void gameloop() {
 						setCurrScreenFile(QUIT);
 					}
 					else if(action == KEY_PRESS_LATK2) {
-						printf("This selected nothing, replace afterwards at some point");
+						printf("This selected nothing, replace afterwards at some point\n");
 					}
+					break;
 				case QUIT:
 					if (action == KEY_PRESS_LEFT) {
 						setCurrScreenFile(LOCAL);
@@ -76,9 +84,17 @@ void gameloop() {
 					else if (action == KEY_PRESS_LATK2) {
 						quit = true;
 					}
+					break;
+				case NEUTRAL_CONTROLLER:
+					if (action == KEY_PRESS_MATK2) {
+						setCurrScreenFile(TRAINING);
+					}
+				default:
+					printf("No output was resulted.\n");
 				}
-
-				break;
+				
+				curr = getCurrScreenFile();
+				loadUpdatedWindow();
 			}
 		}
 	}
@@ -96,7 +112,7 @@ int main(int argc, char* args[])
 	}
 	else {
 		if (!loadScreens()) {
-			printf("Background could not be loaded.");
+			printf("Background could not be loaded.\n");
 		}
 	}
 

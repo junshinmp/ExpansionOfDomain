@@ -97,7 +97,6 @@ ScreenFiles getCurrScreenFile() {
 
 void setCurrScreenFile(ScreenFiles newScreenFiles) {
 	curr = newScreenFiles;
-	loadUpdatedWindow();
 }
 
 void loadUpdatedWindow() {

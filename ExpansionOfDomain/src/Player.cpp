@@ -5,7 +5,7 @@
 #include "KeyboardControls.h"
 #include "Controls.h"
 
-Player::Player(): bindings(), controllerPlugged(false), startLeft(true){
+Player::Player(): bindings(), controllerPlugged(false), startLeft(true){ 
 	controllerPlugged = SDL_NumJoysticks() > 0;
 }
 
