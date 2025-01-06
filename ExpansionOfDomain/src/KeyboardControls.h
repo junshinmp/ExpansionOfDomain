@@ -3,18 +3,37 @@
 #ifndef KEYBOARDCONTROLS_H
 #define KEYBOARDCONTROLS_H
 
-enum KeyboardControls {
-	KEY_PRESS_DOWN,
-	KEY_PRESS_UP,
-	KEY_PRESS_RIGHT,
-	KEY_PRESS_LEFT,
-	KEY_PRESS_LATK1,
-	KEY_PRESS_MATK1,
-	KEY_PRESS_HATK1,
-	KEY_PRESS_LATK2,
-	KEY_PRESS_MATK2,
-	KEY_PRESS_HATK3,
-	KEY_PRESS_TOTAL
+#include <SDL.h>
+#include <stdio.h>
+#include <map>
+
+#include "Controls.h"
+
+/**
+* The Keyboard Controls class handles all the bindings for the keyboard
+**/
+class KeyboardControls {
+private:
+	/**
+	* Mapping of all the bindings for the Keyboard
+	**/
+	std::map<SDL_Keycode, Controls> keyMappings;
+
+public:
+	/**
+	* Default Constructor for the KeyboardControls, sets the default bindings
+	**/
+	KeyboardControls();
+
+	/**
+	* Rebinds the current key mapping, removes if already existing elsewhere
+	**/
+	void rebind(SDL_Keycode rebindKey, Controls action);
+
+	/**
+	* Returns the correlating Controls enum with the key push
+	**/
+	Controls action(SDL_Keycode key);
 };
 
 #endif KEYBOARDCONTROLS_H

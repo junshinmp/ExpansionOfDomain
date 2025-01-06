@@ -4,7 +4,6 @@
 
 #include "renderer.h"
 #include "ScreenFiles.h"
-#include "KeyboardControls.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -26,6 +25,7 @@ bool init()
 }
 
 void cleanUp() {
+	// goes through each of the Screen files and frees it from memory
 	for (int i = 0; i < TOTAL_SCREEN_FILES; i++) {
 		SDL_FreeSurface(SurfaceImages[static_cast<ScreenFiles>(i)]);
 		SurfaceImages[static_cast<ScreenFiles>(i)] = nullptr;
@@ -48,6 +48,7 @@ bool loadScreens() {
 	SurfaceImages[QUIT] = loadSurface("res/QuitSelect.bmp");
 	
 	// loads the menu for checking controls
+	SurfaceImages[NEUTRAL_CONTROLLER] = loadSurface("res/NeutralControlPanel.bmp");
 	SurfaceImages[BACKWARDS] = loadSurface("res/Back.bmp");
 	SurfaceImages[FORWARDS] = loadSurface("res/Right.bmp");
 	SurfaceImages[UP] = loadSurface("res/Up.bmp");
@@ -72,9 +73,11 @@ bool loadScreens() {
 
 	// simply puts the current image now onto the window prior to any more rendering
 	if (success) {
-		background = SurfaceImages.at(curr);
-		SDL_BlitSurface(background, NULL, surface, NULL);
-		SDL_UpdateWindowSurface(window);
+		loadUpdatedWindow();
+		// small delay just for cool transition
+		SDL_Delay(500);
+		curr = TRAINING;
+		loadUpdatedWindow();
 	}
 
 	return success;
@@ -86,4 +89,18 @@ SDL_Surface* loadSurface(const char* pathway) {
 		printf("Current surface could not be loaded at the specified pathway.");
 	}
 	return currLoad;
+}
+
+ScreenFiles getCurrScreenFile() {
+	return curr;
+}
+
+void setCurrScreenFile(ScreenFiles newScreenFiles) {
+	curr = newScreenFiles;
+}
+
+void loadUpdatedWindow() {
+	background = SurfaceImages.at(curr);
+	SDL_BlitSurface(background, NULL, surface, NULL);
+	SDL_UpdateWindowSurface(window);
 }
