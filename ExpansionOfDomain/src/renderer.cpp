@@ -86,9 +86,16 @@ bool loadScreens() {
 SDL_Surface* loadSurface(const char* pathway) {
 	SDL_Surface* currLoad = SDL_LoadBMP(pathway);
 	if (currLoad == NULL) {
-		printf("Current surface could not be loaded at the specified pathway.");
+		printf("Current surface could not be loaded at the specified pathway.\n");
 	}
-	return currLoad;
+
+	SDL_Surface* optimizedLoad = SDL_ConvertSurface(currLoad, surface->format, 0);
+	if (optimizedLoad == NULL) {
+		printf("The surface could not be optimized.\n");
+	}
+
+	SDL_FreeSurface(currLoad);
+	return optimizedLoad;
 }
 
 ScreenFiles getCurrScreenFile() {
