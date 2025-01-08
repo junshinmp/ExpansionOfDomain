@@ -89,6 +89,7 @@ SDL_Surface* loadSurface(const char* pathway) {
 		printf("Current surface could not be loaded at the specified pathway.\n");
 	}
 
+	// used to convert the 24 bit loads into 32 bit via this process
 	SDL_Surface* optimizedLoad = SDL_ConvertSurface(currLoad, surface->format, 0);
 	if (optimizedLoad == NULL) {
 		printf("The surface could not be optimized.\n");
