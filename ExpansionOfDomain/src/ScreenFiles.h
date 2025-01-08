@@ -9,6 +9,7 @@
 enum ScreenFiles {
 	DEFAULT_LOAD,
 	TRAINING,
+	BUTTONS,
 	LOCAL,
 	QUIT,
 

@@ -52,6 +52,9 @@ void gameloop() {
 				case TRAINING:
 					trainingSet(action);
 					break;
+				case BUTTONS:
+					buttonSet(action);
+					break;
 				case LOCAL:
 					localSet(action);
 					break;
@@ -75,16 +78,16 @@ void gameloop() {
 
 void trainingSet(Controls action) {
 	if (action == KEY_PRESS_RIGHT) {
-		setCurrScreenFile(LOCAL);
+		setCurrScreenFile(BUTTONS);
 	}
 	else if (action == KEY_PRESS_LATK2) {
-		setCurrScreenFile(NEUTRAL_CONTROLLER);
+		printf("This selected nothing, replace afterwards at some point\n");
 	}
 }
 
 void localSet(Controls action) {
 	if (action == KEY_PRESS_LEFT) {
-		setCurrScreenFile(TRAINING);
+		setCurrScreenFile(BUTTONS);
 	}
 	else if (action == KEY_PRESS_RIGHT) {
 		setCurrScreenFile(QUIT);
@@ -102,4 +105,15 @@ bool quitSet(Controls action) {
 		return true;
 	}
 	return false;
+}
+
+void buttonSet(Controls action) {
+	if (action == KEY_PRESS_LEFT) {
+		setCurrScreenFile(TRAINING);
+	} else if (action == KEY_PRESS_RIGHT) {
+		setCurrScreenFile(LOCAL);
+	}
+	else if (action == KEY_PRESS_LATK2) {
+		setCurrScreenFile(NEUTRAL_CONTROLLER);
+	}
 }
