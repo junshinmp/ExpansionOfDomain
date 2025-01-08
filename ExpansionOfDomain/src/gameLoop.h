@@ -31,4 +31,6 @@ void localSet(Controls action);
 **/
 bool quitSet(Controls action);
 
+void buttonSet(Controls action);
+
 #endif GAMELOOP_H

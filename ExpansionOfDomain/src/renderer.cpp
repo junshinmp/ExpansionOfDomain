@@ -44,7 +44,8 @@ bool loadScreens() {
 	// loads the main menu elements first
 	SurfaceImages[DEFAULT_LOAD] = loadSurface("res/NeutralSelectr.bmp");
 	SurfaceImages[TRAINING] = loadSurface("res/TrainingSelect.bmp");
-	SurfaceImages[LOCAL] = loadSurface("res/LocalSelect.bmp");
+	SurfaceImages[BUTTONS] = loadSurface("res/ButtonSelect.bmp");
+ 	SurfaceImages[LOCAL] = loadSurface("res/LocalSelect.bmp");
 	SurfaceImages[QUIT] = loadSurface("res/QuitSelect.bmp");
 	
 	// loads the menu for checking controls
