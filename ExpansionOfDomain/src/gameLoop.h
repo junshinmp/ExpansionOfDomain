@@ -31,6 +31,9 @@ void localSet(Controls action);
 **/
 bool quitSet(Controls action);
 
+/**
+* Process the inputs that occur within the button button in the main menu
+**/
 void buttonSet(Controls action);
 
 #endif GAMELOOP_H
