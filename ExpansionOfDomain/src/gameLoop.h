@@ -17,6 +17,11 @@
 void gameloop();
 
 /**
+* Function to induce clarity within the multiple switch statements following a key press
+**/
+void caseKeyDown(ScreenFiles curr, Controls action);
+
+/**
 * Processes the inputs that occur within the training button in the main menu
 **/
 void trainingSet(Controls action);

@@ -7,8 +7,9 @@
 #include "gameLoop.h"
 #include "Player.h"
 
+bool quit = false;
+
 void gameloop() {
-	bool quit = false;
 	SDL_Event event;
 	ScreenFiles curr = getCurrScreenFile();
 
@@ -36,43 +37,54 @@ void gameloop() {
 				break;
 				// checking for if user pushes down a key
 			case SDL_KEYDOWN:
-				SDL_Keycode code = event.key.keysym.sym;
-				Controls action = playerOne.getAction(code);
-				printf("Key of user: %s\n", SDL_GetKeyName(code));
+				if (!event.key.repeat) {
+					SDL_Keycode code = event.key.keysym.sym;
+					printf("Key of user: %s\n", SDL_GetKeyName(code));
 
-				if (action == NONE) {
-					printf("This is not initalized\n");
+					Controls action = playerOne.getAction(code);
+					caseKeyDown(curr, action);
+
+					curr = getCurrScreenFile();
+					loadUpdatedWindow();
 				}
-
-				switch (curr) {
-				case DEFAULT_LOAD:
-					// manually writing out the different inputs here, TODO, find better implementation here
-					setCurrScreenFile(TRAINING);
-					break;
-				case TRAINING:
-					trainingSet(action);
-					break;
-				case BUTTONS:
-					buttonSet(action);
-					break;
-				case LOCAL:
-					localSet(action);
-					break;
-				case QUIT:
-					quit = quitSet(action);
-					break;
-				case NEUTRAL_CONTROLLER:
-					if (action == KEY_PRESS_MATK2) {
-						setCurrScreenFile(TRAINING);
-					}
-				default:
-					printf("No output was resulted.\n");
+			case SDL_KEYUP:
+				if (!event.key.repeat) {
+					SDL_Keycode code = event.key.keysym.sym;
+					playerOne.recheck(code);
 				}
-
-				curr = getCurrScreenFile();
-				loadUpdatedWindow();
 			}
 		}
+	}
+}
+
+void caseKeyDown(ScreenFiles curr, Controls action) {
+	if (action == NONE) {
+		printf("This is not initalized\n");
+	}
+
+	switch (curr) {
+	case DEFAULT_LOAD:
+		// manually writing out the different inputs here, TODO, find better implementation here
+		setCurrScreenFile(TRAINING);
+		break;
+	case TRAINING:
+		trainingSet(action);
+		break;
+	case BUTTONS:
+		buttonSet(action);
+		break;
+	case LOCAL:
+		localSet(action);
+		break;
+	case QUIT:
+		quit = quitSet(action);
+		break;
+	case NEUTRAL_CONTROLLER:
+		if (action == KEY_PRESS_BACK) {
+			setCurrScreenFile(TRAINING);
+		}
+	default:
+		printf("No output was resulted.\n");
 	}
 }
 

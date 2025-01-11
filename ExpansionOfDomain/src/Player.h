@@ -28,6 +28,11 @@ public:
 	**/
 	void setSide(bool side);
 
+	/**
+	* After Player releases button, rechecks the state of the Player
+	**/
+	Controls recheck(SDL_Keycode key);
+
 private:
 	// Players respective keyboard bindings
 	KeyboardControls bindings;

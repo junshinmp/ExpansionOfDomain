@@ -22,3 +22,7 @@ Controls Player::getAction(SDL_Keycode key) {
 void Player::setSide(bool side) {
 	startLeft = side;
 }
+
+Controls Player::recheck(SDL_Keycode key) {
+	return bindings.recheck(key);
+}
