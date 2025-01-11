@@ -52,8 +52,6 @@ Controls KeyboardControls::action(SDL_Keycode input) {
 	// check for the multiple inputs here, checks it upon other the other pressed down actions
 	for (SDL_Keycode downKey : keysDown) {
 		if (downKey != input) {
-			printf("Simultaneous loop ran\n");
-			printf("First input: %s, Second input: %s\n", SDL_GetKeyName(input), SDL_GetKeyName(downKey));
 			curr = simutanousInput(curr, keyMappings.at(downKey));
 		}
 	}
@@ -61,7 +59,6 @@ Controls KeyboardControls::action(SDL_Keycode input) {
 	buttonPressed(input);
 	return curr;
 }
-
 Controls KeyboardControls::recheck(SDL_Keycode input) {
 	buttonReleased(input);
 	return Controls::NONE;
@@ -71,27 +68,27 @@ Controls KeyboardControls::simutanousInput(Controls first, Controls second) {
 	// Left and right cancel out, up and down cancel out
 	if (first == KEY_PRESS_LEFT and second == KEY_PRESS_RIGHT || first == KEY_PRESS_RIGHT and second == KEY_PRESS_LEFT ||
 		first == KEY_PRESS_UP and second == KEY_PRESS_DOWN || first == KEY_PRESS_DOWN and second == KEY_PRESS_UP) {
-		printf("Input was canceled out");
+		printf("Input was canceled out\n");
 		return Controls::NONE;
 	}
 	// left and down goes to down left
 	else if (first == KEY_PRESS_LEFT and second == KEY_PRESS_DOWN || first == KEY_PRESS_DOWN and second == KEY_PRESS_LEFT) {
-		printf("Down left was inputted");
+		printf("Down left was inputted\n");
 		return KEY_PRESS_LDOWN;
 	}
 	// same thing above, but right
 	else if (first == KEY_PRESS_RIGHT and second == KEY_PRESS_DOWN || first == KEY_PRESS_DOWN and second == KEY_PRESS_RIGHT) {
-		printf("Down right was inputted");
+		printf("Down right was inputted\n");
 		return KEY_PRESS_RDOWN;
 	}
 	// left and up goes up left
 	else if (first == KEY_PRESS_LEFT and second == KEY_PRESS_UP || first == KEY_PRESS_UP and second == KEY_PRESS_RIGHT) {
-		printf("Up left was inputted");
+		printf("Up left was inputted\n");
 		return KEY_PRESS_LUP;
 	}
 	// right and up goes up right
 	else if (first == KEY_PRESS_RIGHT and second == KEY_PRESS_UP || first == KEY_PRESS_UP and second == KEY_PRESS_RIGHT) {
-		printf("Up right was inputted");
+		printf("Up right was inputted\n");
 		return KEY_PRESS_RUP;
 	}
 	// since no combo, returns initial Control
@@ -100,11 +97,9 @@ Controls KeyboardControls::simutanousInput(Controls first, Controls second) {
 }
 
 void KeyboardControls::buttonPressed(SDL_Keycode input) {
-	printf("Button %s pressed down\n", SDL_GetKeyName(input));
 	keysDown.insert(input);
 }
 
 void KeyboardControls::buttonReleased(SDL_Keycode input) {
-	printf("Button %s released\n", SDL_GetKeyName(input));
 	keysDown.erase(input);
 }

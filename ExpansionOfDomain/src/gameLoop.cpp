@@ -36,22 +36,27 @@ void gameloop() {
 				quit = true;
 				break;
 				// checking for if user pushes down a key
-			case SDL_KEYDOWN:
-				if (!event.key.repeat) {
-					SDL_Keycode code = event.key.keysym.sym;
-					printf("Key of user: %s\n", SDL_GetKeyName(code));
-
-					Controls action = playerOne.getAction(code);
-					caseKeyDown(curr, action);
-
-					curr = getCurrScreenFile();
-					loadUpdatedWindow();
-				}
 			case SDL_KEYUP:
 				if (!event.key.repeat) {
 					SDL_Keycode code = event.key.keysym.sym;
-					playerOne.recheck(code);
+
+					const Uint8* state = SDL_GetKeyboardState(nullptr);
+					SDL_Scancode scanCode = SDL_GetScancodeFromKey(code);
+
+					if (state[scanCode] == 0) {
+						playerOne.recheck(code);
+					}
 				}
+				break;
+			case SDL_KEYDOWN:
+				SDL_Keycode code = event.key.keysym.sym;
+
+				Controls action = playerOne.getAction(code);
+				caseKeyDown(curr, action);
+
+				curr = getCurrScreenFile();
+				loadUpdatedWindow();
+				break;
 			}
 		}
 	}
